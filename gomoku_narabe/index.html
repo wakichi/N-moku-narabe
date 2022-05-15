@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src = "./main.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <title>N moku narabe</title>
+    </head>
+    <body>
+        <p id="title"> N moku narabe</p>
+        <label> height<input type="text" id="hgt" size="6" maxlength="4" value=6></label><br>
+        <label> width<input type="text" id="wdt" size="6" maxlength="4" value=6></label><br>
+        <label> win_length<input type="text" id="len" size="6" maxlength="4" value=3></label><br>
+        <button class="favorite styled" type="button" onclick="init()">Start</button>
+        <div id = gomoku-field>
+            <!-- <canvas id="canvas_field" width="600" height="300"></canvas> -->
+        </div>
+        <p id="turn"> player 0</p>
+        <!-- <script> init();</script> -->
+
+        <div>
+            <p>how to play</p>
+            Nつつなげたら勝ちだよ!
+        </div>
+    </body>
+</html>
