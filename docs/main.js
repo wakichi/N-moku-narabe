@@ -56,6 +56,14 @@ class Board{
         if (cnt_1 == this.win_length) flg=1;
         return flg
     }
+    change_field(x,y){
+        // fieldを書き換える。描画はしない
+        let cnt = ""
+        let turn_num = this.turn%2
+        if (turn_num == 0){cnt='0'}
+        else {cnt='1'}
+        this.field[y][x] = cnt
+    }
 }
 var board;
 
@@ -89,26 +97,27 @@ function onClickBoard(link){
     let x = id_num%board.width;
     let y=Math.floor(id_num/board.height)
     let tablecontentEle = document.getElementById(id);
-    cnt = ""
-    turn_num = board.turn%2
-    if (turn_num == 0){cnt='0'}
-    else {cnt='1'}
-    tablecontentEle.textContent = cnt;
-    board.field[y][x] = cnt
-    board.turn+=1
+    // tablecontentが#の時(未クリック)
+    //書き換える操作
+    board.change_field(x,y)
+    tablecontentEle.textContent = board.field[y][x];
+    //render()
+    //以外の時
+    //書き換えない&色を変える？
     //turn の表示の変更
     //勝敗の確認
     res = board.check()
     // 状況に応じてメッセージを表示
     //決着
     if (res!=-1){
-        alert(`player ${turn_num} win!!!!!`)
+        alert(`player ${board.turn%2} win!!!!!`)
     }
     //未決着(turn の表示の変更)
     else{
         let turnEle = document.getElementById("turn");
-        turnEle.textContent = `player ${turn_num}`
+        turnEle.textContent = `player ${board.turn%2}`
     }
+    board.turn+=1;
 }
 
 function main(){
