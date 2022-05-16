@@ -64,6 +64,10 @@ class Board{
         else {cnt='1'}
         this.field[y][x] = cnt
     }
+    check_status(x,y){
+        // #=> true;otherwise=>false
+        return this.field[y][x] == "#";
+    }
 }
 var board;
 
@@ -98,12 +102,17 @@ function onClickBoard(link){
     let y=Math.floor(id_num/board.height)
     let tablecontentEle = document.getElementById(id);
     // tablecontentが#の時(未クリック)
-    //書き換える操作
-    board.change_field(x,y)
-    tablecontentEle.textContent = board.field[y][x];
-    //render()
-    //以外の時
-    //書き換えない&色を変える？
+    if (board.check_status(x,y)){
+        // tablecontentが#の時(未クリック)
+        board.change_field(x,y);
+        tablecontentEle.textContent = board.field[y][x]; // renderに変えたい。
+        board.turn+=1;
+    }
+    else{
+        // tablecontentが#以外の時(既クリック)
+        //この時赤で表示する？
+        {}
+    }
     //turn の表示の変更
     //勝敗の確認
     res = board.check()
@@ -117,7 +126,6 @@ function onClickBoard(link){
         let turnEle = document.getElementById("turn");
         turnEle.textContent = `player ${board.turn%2}`
     }
-    board.turn+=1;
 }
 
 function main(){
